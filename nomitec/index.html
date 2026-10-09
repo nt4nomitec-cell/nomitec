@@ -599,7 +599,10 @@
 
             <h1 class="hero-title">Professional <span class="highlight">CCTV Installation</span> & IT Services in Karachi</h1>
             <p class="hero-subtitle">Protect your home, office, and business with cutting-edge surveillance systems, intercom solutions, and comprehensive IT maintenance services.</p>
-            
+<a href="#book-service" class="btn-hero-secondary">
+    <i class="fas fa-calendar-check"></i> Book Service
+</a>            
+
             <div class="hero-buttons">
                 <a href="tel:03293985470" class="btn-hero-primary">
                     <i class="fas fa-phone"></i> Call 0329-3985470
@@ -1301,6 +1304,69 @@
 }
 </style>
 
+<!-- === BOOK A SERVICE SECTION === -->
+<section class="booking-section" id="book-service">
+    <div class="container">
+        <div class="section-header">
+            <h2>Book a Service</h2>
+            <p>Need a CCTV installation or IT support? Fill out the form below and our team will contact you within 24 hours.</p>
+        </div>
+
+        <div class="booking-form-container">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <!-- Aapki Web3Forms Key (Yehi use karein jo pehle se hai) -->
+                <input type="hidden" name="access_key" value="957ba6eb-7a65-494b-873f-530b318a45b7">
+                <input type="hidden" name="subject" value="New Service Booking Request - NomiTec">
+                <input type="hidden" name="from_name" value="NomiTec Booking App">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Your Name</label>
+                        <input type="text" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" name="phone" placeholder="0300-1234567" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-tools"></i> Select Service</label>
+                        <select name="service" required>
+                            <option value="" disabled selected>Choose a service...</option>
+                            <option value="CCTV Installation">CCTV Camera Installation</option>
+                            <option value="Networking & WiFi">Networking & WiFi Setup</option>
+                            <option value="Intercom System">Intercom System</option>
+                            <option value="Alarm System">Alarm System</option>
+                            <option value="IT Maintenance">Computer/Printer Maintenance</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> Preferred Date</label>
+                        <input type="date" name="date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Your Address / Location</label>
+                    <input type="text" name="address" placeholder="Area, Street, House/Shop No." required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comment-dots"></i> Additional Details (Optional)</label>
+                    <textarea name="message" rows="3" placeholder="Tell us more about your requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="book-btn">
+                    <i class="fas fa-paper-plane"></i> Book Now
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-grid">
@@ -1615,6 +1681,87 @@ footer {
     }
     .footer-bottom-left p { justify-content: center !important; }
 }
+
+/* === BOOKING SECTION CSS === */
+.booking-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+.booking-form-container {
+    background: var(--bg-card);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+.form-row .form-group {
+    flex: 1;
+}
+.booking-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+.booking-form-container label i {
+    color: var(--primary-blue);
+    margin-right: 5px;
+}
+.booking-form-container input, 
+.booking-form-container select, 
+.booking-form-container textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.booking-form-container input:focus, 
+.booking-form-container select:focus, 
+.booking-form-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.1);
+}
+.book-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.book-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 168, 232, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .form-row { flex-direction: column; gap: 0; }
+    .booking-form-container { padding: 25px 20px; }
+}
+
 </style>
 
 
