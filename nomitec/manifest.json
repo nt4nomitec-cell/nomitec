@@ -1,0 +1,21 @@
+{
+  "name": "NomiTec - Security & IT Services",
+  "short_name": "NomiTec",
+  "description": "Professional CCTV Installation & IT Services in Karachi",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0077b6",
+  "theme_color": "#00a8e8",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
