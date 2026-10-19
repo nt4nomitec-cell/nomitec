@@ -745,7 +745,14 @@
     </ul>
 </li>
 
-    <li><a href="#contact">Contact</a></li>
+    <!-- Contact Dropdown with Payment -->
+<li class="dropdown">
+    <a href="#contact" class="dropbtn">Contact <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+    <ul class="dropdown-content">
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="payment.html">Payment Details</a></li>
+    </ul>
+</li>
     <li><a href="apps.html">Download</a></li>
     
     <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
@@ -791,6 +798,7 @@
     <a href="index.html#coverage" class="mobile-sub-link">- Coverage Areas</a>
 
     <a href="index.html#contact">Contact</a>
+    <a href="payment.html">Payment Details</a>
     <a href="apps.html">Download Apps</a>
 </div>
 
@@ -1971,12 +1979,74 @@ const flow = {
         text: "Assalam-o-Alaikum! Welcome to NomiTec. 🛡️<br>Hum aapki kya madad kar sakte hain?",
         buttons: [
             { label: "💰 Prices & Packages", action: "price_menu" },
+	    { label: "💳 Make Payment", action: "payment" },  // Yeh add karein
             { label: "📍 Location & Address", action: "location" },
             { label: "⚙️ Our Services", action: "services" },
             { label: "🛡️ Warranty", action: "warranty" },
             { label: "👨‍💻 Talk to Human", action: "human" }
         ]
     },
+
+// Flow object mein yeh add karein
+'payment': {
+    text: "Humare paas multiple payment options available hain. Aap konsi bank se payment karna chahte hain?",
+    buttons: [
+        { label: "🏦 Mashreq Bank", action: "bank_mashreq" },
+        { label: "🏦 Habib Metro", action: "bank_habibmetro" },
+        { label: "📱 EasyPaisa", action: "bank_easypaisa" },
+        { label: "🔙 Back to Main Menu", action: "start" }
+    ]
+},
+'bank_mashreq': {
+    text: "<b>Mashreq Bank Details:</b><br>" +
+          "👤 Account Holder: <b>Nouman Khan</b><br>" +
+          "🏦 Bank: <b>Mashreq Bank</b><br>" +
+          " Account Number: <b>089120146856</b><br>" +
+          "📋 IBAN: <b>PK58MSHQ0000089120146856</b><br>" +
+          "🔧 SWIFT: <b>MSHQPKKK</b>",
+    buttons: [
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'bank_habibmetro': {
+    text: "<b>Habib Metro Bank Details:</b><br>" +
+          "👤 Account Title: <b>NOMAN KHAN</b><br>" +
+          "🏦 Bank: <b>HABIBMETRO</b><br>" +
+          "🔢 Account Number: <b>6016320305714145442</b><br>" +
+          " IBAN: <b>PK85MPBL0163357140145442</b><br><br>" +
+          "📸 Neeche 'View QR Code' par click karke HMB ka QR scan karein.",
+    buttons: [
+        { label: "📄 View QR Code", action: "payment_page" },
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'bank_easypaisa': {
+    text: "<b>EasyPaisa Account:</b><br>" +
+          "👤 Account Holder: <b>NOUMAN KHAN</b><br>" +
+          "📱 Account Number: <b>03120297460</b><br>" +
+          "📋 IBAN: <b>PK30TMFB0000000047165368</b><br><br>" +
+          "📸 Upar diya gaya QR code scan kar ke payment karein.",
+    buttons: [
+        { label: "📄 View QR Code", action: "payment_page" },
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'payment_page': {
+    text: "Hamari payment details page par jayein: <a href='payment.html' target='_blank'>View Payment Details</a>",
+    buttons: [
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'wa_payment_confirm': {
+    text: "Payment confirm karne ke liye WhatsApp par screenshot bhejein.",
+    buttons: [
+        { label: "📱 Chat on WhatsApp", action: "wa_human" }
+    ]
+}
+
     'price_menu': {
         text: "Humare paas CCTV ke behtareen packages available hain. Aapko konsa package chahiye?",
         buttons: [
