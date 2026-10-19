@@ -556,5 +556,54 @@ particleCanvases.forEach(canvas => {
         </div>
     </div>
 </footer>
+
+<!-- Mobile Menu Button (Packages Page Ke Liye) -->
+<button class="hamburger-menu" id="hamburger-btn">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Mobile Navigation Drawer (Agar yeh pehle se nahi hai toh yeh bhi add kar lein) -->
+<div class="mobile-nav">
+    <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
+    <a href="index.html">Home</a>
+    <a href="index.html#services">Services</a>
+    <a href="packages.html">Packages</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="apps.html">Download Apps</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Yeh IDs aapke HTML ke bilkul match karti hain
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const closeBtn = document.querySelector('.mobile-nav-close');
+
+    // Menu Open karna
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', function() {
+            mobileNav.classList.add('active');
+        });
+    }
+    
+    // Menu Close karna
+    if (closeBtn && mobileNav) {
+        closeBtn.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+        });
+    }
+
+    // Jab bhi koi link click ho, menu khud ba khud band ho jaye
+    const links = mobileNav ? mobileNav.querySelectorAll('a') : [];
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+        });
+    });
+});
+</script>
 </body>
 </html>

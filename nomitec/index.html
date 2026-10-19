@@ -545,6 +545,19 @@
     .nav-links { display: none !important; } /* Desktop menu mobile par gayab */
 }
 
+/* Mobile Dropdown Fix */
+.mobile-sub-link {
+    display: none; /* By default chhupay raheinge */
+    padding-left: 30px !important;
+    font-size: 14px !important;
+    color: var(--text-secondary) !important;
+    border-bottom: none !important;
+}
+
+/* Jab JS inline style add karegi tab nazar aayenge */
+.mobile-main-link.open i {
+    transform: rotate(180deg); /* Arrow neeche ghum jayega */
+}
 
     </style>
 <!-- Local Business Schema for Google SEO -->
@@ -2489,12 +2502,75 @@ const flow = {
         text: "Assalam-o-Alaikum! Welcome to NomiTec. 🛡️<br>Hum aapki kya madad kar sakte hain?",
         buttons: [
             { label: "💰 Prices & Packages", action: "price_menu" },
+	    { label: "💳 Make Payment", action: "payment" },  // Yeh add karein
             { label: "📍 Location & Address", action: "location" },
             { label: "⚙️ Our Services", action: "services" },
             { label: "🛡️ Warranty", action: "warranty" },
             { label: "👨‍💻 Talk to Human", action: "human" }
         ]
     },
+
+// Flow object mein yeh add karein
+'payment': {
+    text: "Humare paas multiple payment options available hain. Aap konsi bank se payment karna chahte hain?",
+    buttons: [
+        { label: "🏦 Mashreq Bank", action: "bank_mashreq" },
+        { label: "🏦 Habib Metro", action: "bank_habibmetro" },
+        { label: "📱 EasyPaisa", action: "bank_easypaisa" },
+        { label: "🔙 Back to Main Menu", action: "start" }
+    ]
+},
+'bank_mashreq': {
+    text: "<b>Mashreq Bank Details:</b><br>" +
+          "👤 Account Holder: <b>Nouman Khan</b><br>" +
+          "🏦 Bank: <b>Mashreq Bank</b><br>" +
+          " Account Number: <b>089120146856</b><br>" +
+          "📋 IBAN: <b>PK58MSHQ0000089120146856</b><br>" +
+          "🔧 SWIFT: <b>MSHQPKKK</b>",
+    buttons: [
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'bank_habibmetro': {
+    text: "<b>Habib Metro Bank Details:</b><br>" +
+          "👤 Account Title: <b>NOMAN KHAN</b><br>" +
+          "🏦 Bank: <b>HABIBMETRO</b><br>" +
+          "🔢 Account Number: <b>6016320305714145442</b><br>" +
+          " IBAN: <b>PK85MPBL0163357140145442</b><br><br>" +
+          "📸 Neeche 'View QR Code' par click karke HMB ka QR scan karein.",
+    buttons: [
+        { label: "📄 View QR Code", action: "payment_page" },
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'bank_easypaisa': {
+    text: "<b>EasyPaisa Account:</b><br>" +
+          "👤 Account Holder: <b>NOUMAN KHAN</b><br>" +
+          "📱 Account Number: <b>03120297460</b><br>" +
+          "📋 IBAN: <b>PK30TMFB0000000047165368</b><br><br>" +
+          "📸 Upar diya gaya QR code scan kar ke payment karein.",
+    buttons: [
+        { label: "📄 View QR Code", action: "payment_page" },
+        { label: "✅ Payment Done - Confirm", action: "wa_payment_confirm" },
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'payment_page': {
+    text: "Hamari payment details page par jayein: <a href='payment.html' target='_blank'>View Payment Details</a>",
+    buttons: [
+        { label: "🔙 Back to Payment Options", action: "payment" }
+    ]
+},
+'wa_payment_confirm': {
+    text: "Payment confirm karne ke liye WhatsApp par screenshot bhejein.",
+    buttons: [
+        { label: "📱 Chat on WhatsApp", action: "wa_human" }
+    ]
+}
+
+
     'price_menu': {
         text: "Humare paas CCTV ke behtareen packages available hain. Aapko konsa package chahiye?",
         buttons: [
@@ -2802,5 +2878,118 @@ mobileLinks.forEach(link => {
     <i class="fas fa-bars"></i>
 </button>
 
+<!-- Mobile Menu Button (Sahi Jagah Par) -->
+<button class="hamburger-menu" id="hamburger-btn">
+    <i class="fas fa-bars"></i>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ==========================================
+    // 1. MOBILE MENU OPEN/CLOSE
+    // ==========================================
+    // Yeh dono classes check karega taake button pakka mil jaye
+    var openBtn = document.querySelector('.mobile-menu') || document.getElementById('hamburger-btn');
+    var closeBtn = document.querySelector('.mobile-nav-close');
+    var menu = document.querySelector('.mobile-nav');
+
+    if (openBtn && menu) {
+        openBtn.addEventListener('click', function() {
+            menu.classList.add('active');
+        });
+    }
+
+    if (closeBtn && menu) {
+        closeBtn.addEventListener('click', function() {
+            menu.classList.remove('active');
+        });
+    }
+
+    // ==========================================
+    // 2. MOBILE DROPDOWN LOGIC (Services & About)
+    // ==========================================
+    var mainLinks = document.querySelectorAll('.mobile-main-link');
+    
+    mainLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Page ko jump hone se rokna
+            this.classList.toggle('open'); // Arrow ko ghumana
+            
+            // Is link ke neeche wale sub-links ko show/hide karna
+            var next = this.nextElementSibling;
+            while (next && next.classList.contains('mobile-sub-link')) {
+                if (next.style.display === 'block') {
+                    next.style.display = 'none';
+                } else {
+                    next.style.display = 'block';
+                }
+                next = next.nextElementSibling;
+            }
+        });
+    });
+
+    // Jab normal link click ho toh menu band ho jaye
+    if (menu) {
+        var allLinks = menu.querySelectorAll('a:not(.mobile-main-link)');
+        allLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                menu.classList.remove('active');
+            });
+        });
+    }
+
+    // ==========================================
+    // 3. COUNTING ANIMATION FIX
+    // ==========================================
+    const counters = document.querySelectorAll('.stat-number');
+    let hasCounted = false;
+
+    function startCounting() {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let current = 0;
+            const speed = 40; 
+            const increment = target / speed;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.innerText = Math.ceil(current) + "+";
+                    setTimeout(updateCounter, 30);
+                } else {
+                    counter.innerText = target + (target === 24 ? '/7' : '+');
+                }
+            };
+            updateCounter();
+        });
+    }
+
+    const statsSection = document.querySelector('.stats-section');
+    if(statsSection) {
+        window.addEventListener('scroll', function() {
+            const sectionPos = statsSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight / 1.2;
+            
+            if(sectionPos < screenPos && !hasCounted) {
+                startCounting();
+                hasCounted = true;
+            }
+        });
+    }
+
+    // ==========================================
+    // 4. SERVICE WORKER (PWA)
+    // ==========================================
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('App Ready!', reg))
+                .catch(err => console.log('Error: ', err));
+        });
+    }
+
+}); // End of DOMContentLoaded
+</script>
 </body>
 </html>

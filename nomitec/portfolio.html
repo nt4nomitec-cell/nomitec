@@ -639,6 +639,22 @@
     font-weight: 700 !important;
     color: var(--text-primary) !important;
 }
+
+
+/* Mobile Dropdown Fix */
+.mobile-sub-link {
+    display: none; /* By default chhupay raheinge */
+    padding-left: 30px !important;
+    font-size: 14px !important;
+    color: var(--text-secondary) !important;
+    border-bottom: none !important;
+}
+
+/* Jab JS inline style add karegi tab nazar aayenge */
+.mobile-main-link.open i {
+    transform: rotate(180deg); /* Arrow neeche ghum jayega */
+}
+
     </style>
 <!-- Local Business Schema for Google SEO -->
 <script type="application/ld+json">
@@ -759,22 +775,22 @@
     <a href="index.html">Home</a>
     
     <!-- Mobile Services -->
-    <a href="#services" class="mobile-main-link">Services <i class="fas fa-chevron-down" style="float: right;"></i></a>
-    <a href="#services" class="mobile-sub-link">- CCTV Installation</a>
-    <a href="#services" class="mobile-sub-link">- Networking & WiFi</a>
-    <a href="#services" class="mobile-sub-link">- Intercom Systems</a>
-    <a href="#services" class="mobile-sub-link">- IT Maintenance</a>
+    <a href="index.html#services" class="mobile-main-link">Services <i class="fas fa-chevron-down" style="float: right;"></i></a>
+    <a href="index.html#services" class="mobile-sub-link">- CCTV Installation</a>
+    <a href="index.html#services" class="mobile-sub-link">- Networking & WiFi</a>
+    <a href="index.html#services" class="mobile-sub-link">- Intercom Systems</a>
+    <a href="index.html#services" class="mobile-sub-link">- IT Maintenance</a>
 
     <a href="packages.html">Packages</a>
     <a href="portfolio.html">Portfolio</a>
 
     <!-- Mobile About -->
-    <a href="#about" class="mobile-main-link">About <i class="fas fa-chevron-down" style="float: right;"></i></a>
-    <a href="#about" class="mobile-sub-link">- About Us</a>
-    <a href="#faq" class="mobile-sub-link">- FAQ</a>
-    <a href="#coverage" class="mobile-sub-link">- Coverage Areas</a>
+    <a href="index.html#about" class="mobile-main-link">About <i class="fas fa-chevron-down" style="float: right;"></i></a>
+    <a href="index.html#about" class="mobile-sub-link">- About Us</a>
+    <a href="index.html#faq" class="mobile-sub-link">- FAQ</a>
+    <a href="index.html#coverage" class="mobile-sub-link">- Coverage Areas</a>
 
-    <a href="#contact">Contact</a>
+    <a href="index.html#contact">Contact</a>
     <a href="apps.html">Download Apps</a>
 </div>
 
@@ -2535,5 +2551,76 @@ particleCanvases.forEach(canvas => {
 });
 </script>
 
+<!-- Mobile Menu Button (Packages Page Ke Liye) -->
+<button class="hamburger-menu" id="hamburger-btn">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Mobile Navigation Drawer (Agar yeh pehle se nahi hai toh yeh bhi add kar lein) -->
+<div class="mobile-nav">
+    <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
+    <a href="index.html">Home</a>
+    <a href="index.html#services">Services</a>
+    <a href="packages.html">Packages</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="apps.html">Download Apps</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Mobile Menu Open/Close Logic
+    // Yeh dono classes check karega taake button pakka mil jaye
+    var openBtn = document.querySelector('.mobile-menu') || document.getElementById('mobile-menu-btn') || document.querySelector('.hamburger-menu');
+    var closeBtn = document.querySelector('.mobile-nav-close');
+    var menu = document.querySelector('.mobile-nav');
+
+    if (openBtn && menu) {
+        openBtn.addEventListener('click', function() {
+            menu.classList.add('active');
+        });
+    }
+
+    if (closeBtn && menu) {
+        closeBtn.addEventListener('click', function() {
+            menu.classList.remove('active');
+        });
+    }
+
+    // 2. Dropdown Logic (Services aur About ke liye)
+    var mainLinks = document.querySelectorAll('.mobile-main-link');
+    
+    mainLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Page ko jump hone se rokna
+            this.classList.toggle('open'); // Arrow ko ghumana
+            
+            // Is link ke neeche wale sub-links ko show/hide karna
+            var next = this.nextElementSibling;
+            while (next && next.classList.contains('mobile-sub-link')) {
+                if (next.style.display === 'block') {
+                    next.style.display = 'none';
+                } else {
+                    next.style.display = 'block';
+                }
+                next = next.nextElementSibling;
+            }
+        });
+    });
+
+    // 3. Jab normal link click ho toh menu band ho jaye
+    if (menu) {
+        var allLinks = menu.querySelectorAll('a:not(.mobile-main-link)');
+        allLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                menu.classList.remove('active');
+            });
+        });
+    }
+});
+</script>
 </body>
 </html>
