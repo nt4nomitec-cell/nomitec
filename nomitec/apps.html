@@ -1,647 +1,457 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Apps - NomiTec</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Camera Applications - NomiTec</title>
+    
+    <!-- Favicon Setup -->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="manifest" href="manifest.json">
+    <meta name="msapplication-TileColor" content="#0077b6">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
     <meta name="theme-color" content="#00a8e8">
+    
+    <meta name="description" content="Download official CCTV camera apps for mobile and PC.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary-blue: #00a8e8; --dark-blue: #0077b6; --light-blue: #90e0ef;
-            --bg-body: #ffffff; --bg-card: #ffffff; --text-primary: #2d3436;
-            --text-secondary: #636e72; --border-color: #e0e0e0;
-            --shadow-md: 0 5px 20px rgba(0,0,0,0.08);
+            --green: #06d6a0; --red: #ef476f; --bg-body: #ffffff; --bg-secondary: #f8f9fa;
+            --bg-header: rgba(255, 255, 255, 0.98); --bg-card: #ffffff; --bg-input: #ffffff;
+            --text-primary: #2d3436; --text-secondary: #636e72; --text-muted: #b2bec3;
+            --border-color: #e0e0e0; --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.08); --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg-body); color: var(--text-primary); }
-
-      /* === APPS PAGE HERO (Packages Jaisa) === */
-.page-hero {
+        [data-theme="dark"] {
+            --bg-body: #121212; --bg-secondary: #1e1e1e; --bg-header: rgba(30, 30, 30, 0.98);
+            --bg-card: #252525; --bg-input: #2d2d2d; --text-primary: #f1f1f1;
+            --text-secondary: #b2bec3; --text-muted: #636e72; --border-color: #333333;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.3); --shadow-md: 0 5px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-primary); background-color: var(--bg-body); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; } ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* === HEADER === */
+        header { background: var(--bg-header); backdrop-filter: blur(10px); box-shadow: var(--shadow-sm); position: fixed; width: 100%; top: 0; z-index: 999; overflow: visible !important; }
+        .top-bar { background: var(--dark-blue); color: #ffffff; padding: 8px 0; font-size: 12px; }
+        .top-bar-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px; }
+        .top-bar a { color: #ffffff; margin-left: 15px; transition: 0.3s; font-size: 12px; }
+        .top-bar a:hover { color: var(--light-blue); }
+        .top-bar-email { font-size: 11px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; position: relative; z-index: 1000; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: auto; filter: drop-shadow(0 0 8px rgba(0, 168, 232, 0.6)) drop-shadow(0 0 15px rgba(0, 168, 232, 0.4)); transition: filter 0.3s ease; }
+        .logo img:hover { filter: drop-shadow(0 0 12px rgba(0, 168, 232, 1)) drop-shadow(0 0 25px rgba(0, 168, 232, 0.8)); }
+        .logo-text h1 { font-size: 22px; font-weight: 800; color: var(--text-primary); line-height: 1.1; }
+        .logo-text span { font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.3px; line-height: 1.3; }
+        .nav-links { display: flex; gap: 20px; align-items: center; position: relative; z-index: 100; list-style: none; }
+        .nav-links a { color: var(--text-primary); font-weight: 500; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-blue); }
+        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .theme-toggle:hover { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+        .cta-button { background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)); color: white !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,168,232,0.3); font-size: 13px; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,168,232,0.4); }
+        .mobile-menu { display: none; font-size: 24px; cursor: pointer; color: var(--text-primary); background: none; border: none; }
+        
+        /* Dropdown CSS */
+        .nav-links .dropdown { position: relative !important; overflow: visible !important; }
+        .nav-links .dropdown-content { display: block !important; position: absolute !important; top: 100% !important; left: 0 !important; transform: none !important; background-color: var(--bg-card) !important; min-width: 220px !important; box-shadow: 0px 10px 25px rgba(0,0,0,0.15) !important; z-index: 9999 !important; border-radius: 10px !important; border: 1px solid var(--border-color) !important; overflow: hidden !important; padding: 5px 0 !important; list-style: none !important; margin: 0 !important; margin-top: 15px !important; opacity: 0 !important; visibility: hidden !important; transition: all 0.3s ease !important; }
+        .nav-links .dropdown:hover .dropdown-content { opacity: 1 !important; visibility: visible !important; }
+        .nav-links .dropdown-content li { list-style: none !important; }
+        .nav-links .dropdown-content a { color: var(--text-primary) !important; padding: 12px 20px !important; text-decoration: none !important; display: block !important; text-align: left !important; font-size: 13px !important; font-weight: 500 !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; transition: 0.2s !important; }
+        .nav-links .dropdown-content a:last-child { border-bottom: none !important; }
+        .nav-links .dropdown-content a:hover { background-color: var(--bg-secondary) !important; color: var(--primary-blue) !important; padding-left: 25px !important; }
+        
+        /* Mobile Nav */
+        .mobile-nav { display: none !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: var(--bg-body) !important; z-index: 9999 !important; padding: 80px 20px 20px !important; flex-direction: column !important; gap: 15px !important; overflow-y: auto !important; }
+        .mobile-nav.active { display: flex !important; }
+        .mobile-nav-close { position: absolute !important; top: 20px !important; right: 20px !important; font-size: 28px !important; cursor: pointer !important; color: var(--text-primary) !important; background: none !important; border: none !important; }
+        .mobile-nav a { font-size: 17px !important; padding: 14px !important; border-bottom: 1px solid var(--border-color) !important; color: var(--text-primary) !important; font-weight: 500 !important; text-decoration: none !important; display: block !important; }
+        
+        @media (max-width: 968px) { .nav-links { display: none !important; } .mobile-menu { display: block !important; } }
+        
+        /* === PAGE HERO === */
+        .page-hero {
     background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
     color: white;
-    padding: 100px 0 80px;
+    padding: 100px 0 80px; /* Upar se thori jagah taake header na chupe */
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-/* Animation ko background mein bhejne ke liye */
-.hero-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Text ko animation ke upar lane ke liye */
-.page-hero .container {
-    position: relative;
-    z-index: 2;
-}
-
-.page-hero h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 2;
-}
-
-.page-hero p {
-    font-size: 18px;
-    opacity: 0.9;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-}
-
-       
-        /* Apps Grid */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        /* App Card */
-        .app-card {
-            background: var(--bg-card);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
-        }
-        .app-card:hover { transform: translateY(-5px); }
-
-        .app-icon {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 35px; color: white;
-        }
-
-        .app-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--text-primary); }
-        .app-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 25px; line-height: 1.5; }
-
-        /* Download Buttons */
-        .dl-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--bg-body);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px; font-weight: 600;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-        .dl-btn:hover {
-            background: var(--primary-blue); color: white; border-color: var(--primary-blue);
-        }
-        .dl-btn i { font-size: 18px; }
-
-        /* Back Button */
-        .back-link {
-            display: inline-flex; align-items: center; gap: 8px;
-            color: var(--primary-blue); text-decoration: none;
-            font-weight: 600; margin-bottom: 30px;
-        }
-
-.page-hero {
-    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-    color: white;
-    padding: 100px 0 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-
-.hero-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.page-hero .container {
-    position: relative;
-    z-index: 2;
-}
-
-/* === COMPACT FOOTER FIX (Apps & Booking Pages) === */
-footer {
-    background: #0a0a0a;
-    color: white;
-    padding: 40px 0 20px; /* Padding thori compact ki */
-}
-
-/* Footer ko beech mein aur limited width mein rakhne ke liye */
-footer .container {
-    max-width: 1100px !important; 
-    margin: 0 auto !important;
-    padding: 0 20px !important;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr; /* Columns ko balance kiya */
-    gap: 25px; /* Gap thora kam kiya taake phaila hua na lage */
-    margin-bottom: 20px;
-}
-
-.footer-about p {
-    color: rgba(255,255,255,0.7);
-    margin: 10px 0;
-    line-height: 1.6;
-    font-size: 13px;
-}
-
-.social-links {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-.social-links a {
-    width: 35px;
-    height: 35px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: 0.3s;
-    font-size: 14px;
-}
-.social-links a:hover {
-    background: var(--primary-blue);
-    transform: translateY(-3px);
-}
-
-/* Map ko compact size mein rakhna */
-.footer-map-small {
-    width: 100%;
-    height: 100px !important; /* Height kam kar di */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 168, 232, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 10px;
-}
-.footer-map-small iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-
-/* Headings ko thora chota aur neat karna */
-.footer-column h4, .footer-col h3 {
-    font-size: 15px !important;
-    margin-bottom: 12px !important;
-    color: white;
-    font-weight: 700;
-    position: relative;
-    padding-bottom: 8px;
-}
-.footer-column h4::after, .footer-col h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 35px;
-    height: 2px;
-    background: var(--primary-blue);
-    border-radius: 2px;
-}
-
-/* List items ko compact karna */
-.footer-column ul, .footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.footer-column ul li, .footer-col ul li {
-    margin-bottom: 8px !important;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px !important;
-}
-.footer-column ul li i, .footer-col ul li i {
-    margin-top: 3px;
-    color: var(--primary-blue);
-    font-size: 12px !important;
-}
-.footer-column ul li a, .footer-col ul li a {
-    color: rgba(255,255,255,0.7);
-    transition: 0.3s;
-    font-size: 13px !important;
-    text-decoration: none;
-}
-.footer-column ul li a:hover, .footer-col ul li a:hover {
-    color: var(--primary-blue);
-    padding-left: 5px;
-}
-
-/* Footer Bottom */
-.footer-bottom-new {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100% !important;
-    padding-top: 20px !important;
-    margin-top: 25px !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.footer-bottom-new p {
-    margin: 0 !important;
-    font-size: 12px !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-.footer-bottom-left p {
-    display: flex !important;
-    align-items: center !important;
-}
-
-/* Mobile Responsive Fix */
-@media (max-width: 968px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-}
-@media (max-width: 576px) {
-    .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-    .footer-about { text-align: center; }
-    .social-links { justify-content: center; }
-    .footer-column ul li, .footer-col ul li { justify-content: center; }
-    .footer-column h4::after, .footer-col h3::after { left: 50%; transform: translateX(-50%); }
-    
-    .footer-map-small { height: 150px !important; margin: 15px auto 0; max-width: 100%; }
-    
-    .footer-bottom-new {
-        flex-direction: column !important;
-        text-align: center !important;
-        gap: 8px !important;
-    }
-    .footer-bottom-left p { justify-content: center !important; }
-}
-/* === FOOTER LOGO SIZE FIX === */
-footer .logo img {
-    height: 40px !important; /* Logo ko chota karna */
-    width: auto !important;
-    max-width: 100px !important;
-}
-
-footer .logo-text h1 {
-    font-size: 18px !important; /* Heading choti karna */
-    line-height: 1.2 !important;
-}
-
-footer .logo-text span {
-    font-size: 10px !important; /* Tagline choti karna */
-}
-
-footer .logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    margin-bottom: 10px !important;
-}
-
-/* Mobile Dropdown Fix */
-.mobile-sub-link {
-    display: none; /* By default chhupay raheinge */
-    padding-left: 30px !important;
-    font-size: 14px !important;
-    color: var(--text-secondary) !important;
-    border-bottom: none !important;
-}
-
-/* Jab JS inline style add karegi tab nazar aayenge */
-.mobile-main-link.open i {
-    transform: rotate(180deg); /* Arrow neeche ghum jayega */
-}
-
-
+        .page-hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero-bg.jpg') center/cover; opacity: 0.1; z-index: 1; }
+        .hero-particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .page-hero .container { position: relative; z-index: 2; }
+        .page-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; letter-spacing: 1px; }
+        .page-hero p { font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        @media (max-width: 768px) { .page-hero { padding: 80px 0 60px; } .page-hero h1 { font-size: 36px; } .page-hero p { font-size: 16px; padding: 0 15px; } }
+        
+        /* === APPS SECTION === */
+        .apps-section { padding: 80px 0; background: var(--bg-body); min-height: 100vh; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary-blue); font-weight: 600; font-size: 15px; margin-bottom: 30px; transition: 0.3s; padding: 10px 20px; border-radius: 50px; border: 2px solid var(--primary-blue); }
+        .back-link:hover { background: var(--primary-blue); color: white; transform: translateX(-5px); }
+        .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .app-card { background: var(--bg-card); border-radius: 20px; padding: 35px 25px; text-align: center; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); transition: 0.3s; }
+        .app-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--primary-blue); }
+        .app-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 36px; color: white; }
+        .app-card h3 { font-size: 24px; color: var(--text-primary); margin-bottom: 15px; }
+        .app-card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 25px; line-height: 1.6; }
+        .dl-btn { display: block; width: 100%; padding: 12px 20px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-primary); font-weight: 600; font-size: 14px; transition: 0.3s; margin-bottom: 10px; text-align: center; }
+        .dl-btn:hover { background: var(--primary-blue); color: white; border-color: var(--primary-blue); transform: translateY(-2px); }
+        .dl-btn i { margin-right: 8px; }
+        @media (max-width: 768px) { .apps-grid { grid-template-columns: 1fr; } .apps-section { padding: 60px 0; } }
+        
+        /* === FOOTER === */
+        footer { background: #0a0a0a; color: white; padding: 50px 0 25px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 20px; }
+        .footer-about p { color: rgba(255,255,255,0.7); margin: 15px 0; line-height: 1.7; font-size: 14px; }
+        .social-links { display: flex; gap: 12px; margin-bottom: 20px; }
+        .social-links a { width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; }
+        .social-links a:hover { background: var(--primary-blue); transform: translateY(-3px); }
+        .footer-column h4, .footer-col h3 { font-size: 16px; margin-bottom: 15px; color: white; font-weight: 700; position: relative; padding-bottom: 10px; }
+        .footer-column h4::after, .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--primary-blue); border-radius: 2px; }
+        .footer-column ul, .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-column ul li, .footer-col ul li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; }
+        .footer-column ul li i, .footer-col ul li i { margin-top: 3px; color: var(--primary-blue); font-size: 13px; }
+        .footer-column ul li a, .footer-col ul li a { color: rgba(255,255,255,0.7); transition: 0.3s; font-size: 14px; }
+        .footer-column ul li a:hover, .footer-col ul li a:hover { color: var(--primary-blue); padding-left: 5px; }
+        .footer-map-small { width: 100%; height: 120px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 168, 232, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 10px; }
+        .footer-map-small iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .footer-bottom-new { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding-top: 25px !important; margin-top: 30px !important; border-top: 1px solid rgba(255, 255, 255, 0.15) !important; flex-wrap: wrap; gap: 15px; }
+        .footer-bottom-new p { margin: 0 !important; font-size: 14px; color: rgba(255, 255, 255, 0.7) !important; }
+        @media (max-width: 968px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 25px; } }
+        @media (max-width: 576px) { .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; } .footer-about { text-align: center; } .social-links { justify-content: center; } .footer-column ul li, .footer-col ul li { justify-content: center; } .footer-map-small { height: 180px; margin: 15px auto 0; max-width: 100%; } .footer-bottom-new { flex-direction: column !important; text-align: center !important; gap: 10px !important; } }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <section class="page-hero">
-    <canvas class="hero-particles"></canvas>
-    <div class="container">
-        <h1><i class="fas fa-download"></i> Camera Applications</h1>
-        <p>Download official apps to view your CCTV cameras on Mobile & PC.</p>
-    </div>
-</section>
-
-    <div class="container">
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
-
-        <div class="apps-grid">
-            
-            <!-- App 1: Hik-Connect (Mobile) -->
-            <div class="app-card">
-                <div class="app-icon"><i class="fas fa-mobile-alt"></i></div>
-                <h3>Hik-Connect</h3>
-                <p>Official mobile app for Hikvision cameras. View live feeds, playback, and receive alerts.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.hikvision.hikconnect" target="_blank" class="dl-btn">
-                    <i class="fab fa-google-play"></i> Download for Android
-                </a>
-                <a href="https://apps.apple.com/us/app/hik-connect/id1087803190" target="_blank" class="dl-btn">
-                    <i class="fab fa-apple"></i> Download for iOS
-                </a>
+    <!-- === HEADER === -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-email"><i class="fas fa-envelope"></i> nomitec98@gmail.com | nt4nomitec@gmail.com</div>
+                    <div>
+                        <a href="tel:03293985470"><i class="fas fa-phone"></i> 0329-3985470</a>
+                        <a href="https://whatsapp.com/channel/0029VbCcYzMIt5rrb5KeqR1V" target="_blank"><i class="fab fa-whatsapp"></i> Join Channel</a>
+                    </div>
+                </div>
             </div>
-
-            <!-- App 2: iVMS-4200 (PC) -->
-            <div class="app-card">
-                <div class="app-icon"><i class="fas fa-desktop"></i></div>
-                <h3>iVMS-4200</h3>
-                <p>Professional PC software for Hikvision NVR/DVR management and live viewing.</p>
-                <a href="https://www.hikvision.com/en/support/tools/software/" target="_blank" class="dl-btn">
-                    <i class="fab fa-windows"></i> Download for Windows PC
-                </a>
-            </div>
-
-            <!-- App 3: DMSS (Dahua) -->
-            <div class="app-card">
-                <div class="app-icon"><i class="fas fa-video"></i></div>
-                <h3>DMSS (Dahua)</h3>
-                <p>Official mobile app for Dahua cameras and NVRs. High-quality live streaming.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.mm.android.direct.gdmssphone" target="_blank" class="dl-btn">
-                    <i class="fab fa-google-play"></i> Download for Android
-                </a>
-                <a href="https://apps.apple.com/us/app/dmss/id1504700269" target="_blank" class="dl-btn">
-                    <i class="fab fa-apple"></i> Download for iOS
-                </a>
-            </div>
-
         </div>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="index.html" style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/logo.png" alt="NomiTec Logo">
+                        <div class="logo-text">
+                            <h1>NomiTec</h1>
+                            <span>Our Security is Your Peace of Mind.</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#services" class="dropbtn">Services <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="index.html#services">CCTV Installation</a></li>
+                            <li><a href="index.html#services">Networking & WiFi</a></li>
+                            <li><a href="index.html#services">Intercom Systems</a></li>
+                            <li><a href="index.html#services">IT Maintenance</a></li>
+			    <li><a href="booking.html">Book a Service</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#about" class="dropbtn">About <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="index.html#faq">FAQ</a></li>
+                            <li><a href="index.html#coverage">Coverage Areas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#contact" class="dropbtn">Contact <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="index.html#contact">Contact Us</a></li>
+                            <li><a href="payment.html">Payment Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="apps.html" class="active">Download</a></li>
+                    <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+                    <li><a href="tel:03293985470" class="cta-button"><i class="fas fa-phone"></i> Call Now</a></li>
+                </ul>
+
+                <div class="mobile-menu" id="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mobile-nav">
+        <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="packages.html">Packages</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="payment.html">Payment Details</a>
+        <a href="apps.html">Download Apps</a>
+        <a href="booking.html">Book a Service</a>
     </div>
 
+    <!-- === PAGE HERO === -->
+    <section class="page-hero">
+        <canvas class="hero-particles"></canvas>
+        <div class="container">
+            <h1><i class="fas fa-download"></i> Camera Applications</h1>
+            <p>Download official apps to view your CCTV cameras on Mobile & PC.</p>
+        </div>
+    </section>
+
+    <!-- === APPS SECTION === -->
+    <section class="apps-section">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+            <div class="apps-grid">
+                
+                <!-- App 1: Hik-Connect (Mobile) -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Hik-Connect</h3>
+                    <p>Official mobile app for Hikvision cameras. View live feeds, playback, and receive alerts.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.hikvision.hikconnect" target="_blank" class="dl-btn">
+                        <i class="fab fa-google-play"></i> Download for Android
+                    </a>
+                    <a href="https://apps.apple.com/us/app/hik-connect/id1087803190" target="_blank" class="dl-btn">
+                        <i class="fab fa-apple"></i> Download for iOS
+                    </a>
+                </div>
+
+                <!-- App 2: iVMS-4200 (PC) -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-desktop"></i></div>
+                    <h3>iVMS-4200</h3>
+                    <p>Professional PC software for Hikvision NVR/DVR management and live viewing.</p>
+                    <a href="https://www.hikvision.com/en/support/tools/software/" target="_blank" class="dl-btn">
+                        <i class="fab fa-windows"></i> Download for Windows PC
+                    </a>
+                </div>
+
+                <!-- App 3: DMSS (Dahua) -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-video"></i></div>
+                    <h3>DMSS (Dahua)</h3>
+                    <p>Official mobile app for Dahua cameras and NVRs. High-quality live streaming.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.mm.android.direct.gdmssphone" target="_blank" class="dl-btn">
+                        <i class="fab fa-google-play"></i> Download for Android
+                    </a>
+                    <a href="https://apps.apple.com/us/app/dmss/id1504700269" target="_blank" class="dl-btn">
+                        <i class="fab fa-apple"></i> Download for iOS
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="NomiTec">
+                        <div class="logo-text">
+                            <h1 style="color: white; font-size: 22px;">NomiTec</h1>
+                            <span style="color: #90e0ef; font-size: 11px; display: block; margin-top: 2px;">Our Security is Your Peace of Mind.</span>
+                        </div>
+                    </div>
+                    <p>Your trusted partner for CCTV installation, security systems, and IT services in Karachi.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1MAsuUqzdz/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/n4nomitec" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://whatsapp.com/channel/0029VbCcYzMIt5rrb5KeqR1V" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="footer-map-small">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3621.193294660097!2d66.99793749999999!3d24.823062499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1790675248163!5m2!1sen!2s" style="border:0; width: 100%; height: 100%; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="packages.html">Packages</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="apps.html">Download Apps</a></li>
+                        <li><a href="booking.html">Book a Service</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="index.html#services">CCTV Installation</a></li>
+                        <li><a href="index.html#services">Intercom Systems</a></li>
+                        <li><a href="index.html#services">Alarm Systems</a></li>
+                        <li><a href="index.html#services">Networking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> <a href="tel:03293985470">0329-3985470</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:nomitec98@gmail.com">nomitec98@gmail.com</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:nt4nomitec@gmail.com">nt4nomitec@gmail.com</a></li>
+                        <li style="color: rgba(255,255,255,0.7); line-height: 1.5;"><i class="fas fa-map-marker-alt"></i> Plot no.136, Tashkand Colony, Masan Chowk, Subhanallah Masjid Road, Keamari, Karachi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-new">
+                <div class="footer-bottom-left">
+                    <p><i class="fas fa-laptop-code" style="color: #90e0ef; margin-right: 8px;"></i> Powered by <strong style="color: #90e0ef; font-weight: 700;">NomiTec</strong></p>
+                </div>
+                <div class="footer-bottom-right">
+                    <p>&copy; 2026 NomiTec. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- === SCRIPTS === -->
     <script>
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        updateIcon(currentTheme);
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+        function updateIcon(theme) {
+            if (theme === 'dark') { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); } 
+            else { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        }
+
+        // Mobile Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const closeBtn = document.querySelector('.mobile-nav-close');
+            if (menuBtn && mobileNav) {
+                menuBtn.addEventListener('click', function() { mobileNav.classList.add('active'); });
+            }
+            if (closeBtn && mobileNav) {
+                closeBtn.addEventListener('click', function() { mobileNav.classList.remove('active'); });
+            }
+            const links = mobileNav ? mobileNav.querySelectorAll('a') : [];
+            links.forEach(link => {
+                link.addEventListener('click', function() { mobileNav.classList.remove('active'); });
+            });
+        });
+
+        // Particles Animation
+        const particleCanvases = document.querySelectorAll('.hero-particles');
+        particleCanvases.forEach(canvas => {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+            function setCanvasSize() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            }
+            setCanvasSize();
+            window.addEventListener('resize', () => { setCanvasSize(); init(); });
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() * 1 - 0.5) * 0.5;
+                    this.speedY = (Math.random() * 1 - 0.5) * 0.5;
+                    this.color = 'rgba(255, 255, 255, 0.5)';
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.width * canvas.height) / 15000;
+                for (let i = 0; i < numberOfParticles; i++) { particlesArray.push(new Particle()); }
+            }
+            function connect() {
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2) + ((particlesArray[a].y - particlesArray[b].y) ** 2);
+                        if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                            let opacityValue = 1 - (distance / 10000);
+                            ctx.strokeStyle = 'rgba(255, 255, 255,' + (opacityValue * 0.2) + ')';
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); particlesArray[i].draw(); }
+                connect();
+            }
+            init(); animate();
+        });
+
+        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('App Ready!', reg))
+                    .catch(err => console.log('Error: ', err));
             });
         }
     </script>
-
-<script>
-// === PAGE HEADER PARTICLES ANIMATION ===
-const particleCanvases = document.querySelectorAll('.hero-particles');
-
-particleCanvases.forEach(canvas => {
-    const ctx = canvas.getContext('2d');
-    let particlesArray;
-
-    function setCanvasSize() {
-        canvas.width = canvas.parentElement.offsetWidth;
-        canvas.height = canvas.parentElement.offsetHeight;
-    }
-    setCanvasSize();
-
-    window.addEventListener('resize', () => {
-        setCanvasSize();
-        init();
-    });
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedX = (Math.random() * 1 - 0.5) * 0.5;
-            this.speedY = (Math.random() * 1 - 0.5) * 0.5;
-            this.color = 'rgba(255, 255, 255, 0.5)';
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-            if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-        }
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function init() {
-        particlesArray = [];
-        let numberOfParticles = (canvas.width * canvas.height) / 15000;
-        for (let i = 0; i < numberOfParticles; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-
-    function connect() {
-        for (let a = 0; a < particlesArray.length; a++) {
-            for (let b = a; b < particlesArray.length; b++) {
-                let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2) + 
-                              ((particlesArray[a].y - particlesArray[b].y) ** 2);
-                if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                    let opacityValue = 1 - (distance / 10000);
-                    ctx.strokeStyle = 'rgba(255, 255, 255,' + (opacityValue * 0.2) + ')';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-            particlesArray[i].draw();
-        }
-        connect();
-    }
-
-    init();
-    animate();
-});
-</script>
-
-</style>
-<!-- === PROFESSIONAL FOOTER SECTION === -->
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            
-            <!-- LEFT COLUMN: Logo, About, Social + MAP -->
-            <div class="footer-about">
-                <div class="logo">
-                    <img src="images/logo.png" alt="NomiTec">
-                    <div class="logo-text">
-                        <h1 style="color: white; font-size: 22px;">NomiTec</h1>
-                        <span style="color: #90e0ef; font-size: 11px; display: block; margin-top: 2px;">Our Security is Your Peace of Mind.</span>
-                    </div>
-                </div>
-                <p>Your trusted partner for CCTV installation, security systems, and IT services in Karachi.</p>
-                
-                <!-- Social Icons -->
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/1MAsuUqzdz/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/n4nomitec?stkn=MTY5ODZ1dWw0cm91Yw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://whatsapp.com/channel/0029VbCcYzMIt5rrb5KeqR1V" target="_blank" aria-label="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
-                </div>
-
-                <!-- Map -->
-                <div class="footer-map-small">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3621.193294660097!2d66.99793749999999!3d24.823062499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1790675248163!5m2!1sen!2s" 
-                        style="border:0; width: 100%; height: 100%; border-radius: 8px;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe>
-                </div>
-            </div>
-
-            <!-- Quick Links Section -->
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#services">Services</a></li>
-                    <li><a href="packages.html">Packages</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="apps.html">Download Apps</a></li>
-                    <li><a href="booking.html">Book a Service</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Our Services -->
-            <div class="footer-column">
-                <h4>Our Services</h4>
-                <ul>
-                    <li><a href="index.html#services">CCTV Installation</a></li>
-                    <li><a href="index.html#services">Intercom Systems</a></li>
-                    <li><a href="index.html#services">Alarm Systems</a></li>
-                    <li><a href="index.html#services">Networking</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact Info Column -->
-            <div class="footer-column">
-                <h4>Contact Info</h4>
-                <ul>
-                    <li><i class="fas fa-phone"></i> <a href="tel:03293985470">0329-3985470</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:nomitec98@gmail.com">nomitec98@gmail.com</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:nt4nomitec@gmail.com">nt4nomitec@gmail.com</a></li>
-                    <li style="color: rgba(255,255,255,0.7); line-height: 1.5;"><i class="fas fa-map-marker-alt"></i> Plot no.136, Tashkand Colony, Masan Chowk, Subhanallah Masjid Road, Keamari, Karachi</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Footer Bottom -->
-        <div class="footer-bottom-new">
-            <div class="footer-bottom-left">
-                <p><i class="fas fa-laptop-code" style="color: #90e0ef; margin-right: 8px;"></i> Powered by <strong style="color: #90e0ef; font-weight: 700;">NomiTec</strong></p>
-            </div>
-            <div class="footer-bottom-right">
-                <p>&copy; 2026 NomiTec. All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- Mobile Menu Button (Packages Page Ke Liye) -->
-<button class="hamburger-menu" id="hamburger-btn">
-    <i class="fas fa-bars"></i>
-</button>
-
-<!-- Mobile Navigation Drawer (Agar yeh pehle se nahi hai toh yeh bhi add kar lein) -->
-<div class="mobile-nav">
-    <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
-    <a href="index.html">Home</a>
-    <a href="index.html#services">Services</a>
-    <a href="packages.html">Packages</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="index.html#about">About</a>
-    <a href="index.html#faq">FAQ</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="apps.html">Download Apps</a>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // 1. Mobile Menu Open/Close Logic
-    // Yeh dono classes check karega taake button pakka mil jaye
-    var openBtn = document.querySelector('.mobile-menu') || document.getElementById('mobile-menu-btn') || document.querySelector('.hamburger-menu');
-    var closeBtn = document.querySelector('.mobile-nav-close');
-    var menu = document.querySelector('.mobile-nav');
-
-    if (openBtn && menu) {
-        openBtn.addEventListener('click', function() {
-            menu.classList.add('active');
-        });
-    }
-
-    if (closeBtn && menu) {
-        closeBtn.addEventListener('click', function() {
-            menu.classList.remove('active');
-        });
-    }
-
-    // 2. Dropdown Logic (Services aur About ke liye)
-    var mainLinks = document.querySelectorAll('.mobile-main-link');
-    
-    mainLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // Page ko jump hone se rokna
-            this.classList.toggle('open'); // Arrow ko ghumana
-            
-            // Is link ke neeche wale sub-links ko show/hide karna
-            var next = this.nextElementSibling;
-            while (next && next.classList.contains('mobile-sub-link')) {
-                if (next.style.display === 'block') {
-                    next.style.display = 'none';
-                } else {
-                    next.style.display = 'block';
-                }
-                next = next.nextElementSibling;
-            }
-        });
-    });
-
-    // 3. Jab normal link click ho toh menu band ho jaye
-    if (menu) {
-        var allLinks = menu.querySelectorAll('a:not(.mobile-main-link)');
-        allLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                menu.classList.remove('active');
-            });
-        });
-    }
-});
-</script>
 
 </body>
 </html>
