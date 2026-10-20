@@ -143,6 +143,18 @@
         @media (max-width: 968px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 25px; } }
         @media (max-width: 576px) { .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; } .footer-about { text-align: center; } .social-links { justify-content: center; } .footer-column ul li, .footer-col ul li { justify-content: center; } .footer-map-small { height: 180px; margin: 15px auto 0; max-width: 100%; } .footer-bottom-new { flex-direction: column !important; text-align: center !important; gap: 10px !important; } }
     </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VTR4X0TZXV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VTR4X0TZXV');
+</script>
+
+
 </head>
 <body>
 
@@ -242,7 +254,7 @@
         <div style="background: var(--bg-card); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); max-width: 800px; margin: 0 auto;">
             <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="957ba6eb-7a65-494b-873f-530b318a45b7">
-                <input type="hidden" name="subject" value="New Service Booking Request - NomiTec">
+                <input type="hidden" name="redirect" value="https://nomitec.vercel.app/thank-you.html">
                 
                 <div style="display: flex; gap: 20px; margin-bottom: 20px;">
                     <div style="flex: 1; margin-bottom: 20px;">
